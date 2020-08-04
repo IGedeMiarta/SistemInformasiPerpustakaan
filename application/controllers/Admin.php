@@ -31,7 +31,7 @@ class Admin extends CI_Controller
     {
         // mengambil data dari database
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['petugas'] = $this->db->query("SELECT * FROM petugas")->result();
+        $data['petugas'] = $this->db->query("SELECT * FROM petugas, user WHERE petugas.id_login=user.id_login")->result();
         $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
 
         $this->load->view('admin/header', $data);
@@ -135,5 +135,84 @@ class Admin extends CI_Controller
 
         // mengalihkan halaman ke halaman data anggota
         redirect(base_url() . 'admin/petugas');
+    }
+
+    function buku()
+    {
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['buku'] = $this->db->query("SELECT detail_buku.id_buku,gambar,judul,tahun,penulis,penerbit,ket,buku.status_buku, COUNT(detail_buku.id_buku) AS stok, COUNT(IF(detail_buku.status!=2,1,null))AS stok2 FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku  GROUP by id_buku")->result();
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/buku', $data);
+        $this->load->view('admin/footer');
+    }
+
+    function buku_detail($id_buku)
+    {
+        $where = array(
+            'id_buku' => $id_buku
+        );
+        $data['detail'] = $this->db->query("SELECT dt.id_buku, gambar, id_detail,judul,penulis,tahun,penerbit,tgl_masuk,ket,status FROM buku bk INNER JOIN detail_buku dt on bk.id_buku=dt.id_buku WHERE dt.id_buku=\"$id_buku\"")->result();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/buku_detail', $data);
+        $this->load->view('admin/footer');
+    }
+
+    function peminjaman()
+    {
+        // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+        $data['peminjaman'] = $this->db->query("SELECT peminjaman.peminjaman_id, detail_buku.Id_detail, buku.judul, buku.id_buku, 
+					anggota.nama,anggota.nis,anggota.kelas, 
+					peminjaman.peminjaman_tanggal_mulai, peminjaman.peminjaman_tanggal_sampai, peminjaman.tanggal_kembali, peminjaman.peminjaman_status 
+					FROM peminjaman INNER JOIN detail_buku INNER JOIN buku INNER JOIN anggota 
+					WHERE detail_buku.Id_detail=peminjaman.peminjaman_buku 
+					AND buku.id_buku=detail_buku.id_buku 
+					AND anggota.nis=peminjaman.peminjaman_anggota 
+					AND peminjaman_status=2
+					ORDER BY peminjaman_id DESC")->result();
+
+        $data['peminjaman2'] = $this->db->query("SELECT peminjaman.peminjaman_id, detail_buku.Id_detail, buku.judul, buku.id_buku, 
+					anggota.nama,anggota.nis,anggota.kelas, 
+					peminjaman.peminjaman_tanggal_mulai, peminjaman.peminjaman_tanggal_sampai, peminjaman.tanggal_kembali, peminjaman.peminjaman_status 
+					FROM peminjaman INNER JOIN detail_buku INNER JOIN buku INNER JOIN anggota 
+					WHERE detail_buku.Id_detail=peminjaman.peminjaman_buku 
+					AND buku.id_buku=detail_buku.id_buku 
+					AND anggota.nis=peminjaman.peminjaman_anggota 
+					AND peminjaman_status=1
+					ORDER BY tanggal_kembali DESC")->result();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/peminjaman', $data);
+        $this->load->view('admin/footer');
+    }
+
+    function pemesanan()
+    {
+        $data['pemesanan'] = $this->db->query("SELECT pemesanan.id_pesan,pemesanan.buku, pemesanan.nama_pemesan, waktu_pesan, pemesanan.status, anggota.nama, anggota.nis,anggota.kelas,buku.judul,buku.penulis, COUNT(IF(detail_buku.status!=2,1,null))AS stok FROM pemesanan,anggota,buku,detail_buku
+            WHERE pemesanan.nama_pemesan=anggota.nis
+            AND pemesanan.buku=buku.id_buku
+            AND buku.id_buku=detail_buku.id_buku
+            GROUP BY id_pesan DESC")->result();
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/pemesanan', $data);
+        $this->load->view('admin/footer');
     }
 }

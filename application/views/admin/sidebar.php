@@ -24,23 +24,23 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url() . 'admin/buku' ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-book"></i>
                         <p>
-                            Data Buku
+                            Buku
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('admin/peminjaman') ?>" class="nav-link">
                         <i class="nav-icon fab fa-fw fa-buffer"></i>
                         <p>
-                            Data Peminjaman
+                            Peminjaman
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('admin/pemesanan') ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-mail-bulk"></i>
                         <p>
                             Pemesanan Buku

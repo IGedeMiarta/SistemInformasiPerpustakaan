@@ -37,6 +37,7 @@
                                     <th>Nama</th>
                                     <th>Jenkel</th>
                                     <th>No Hp</th>
+                                    <th>Email</th>
                                     <th width="8%">Opsi</th>
                                 </tr>
                             </thead>
@@ -61,6 +62,7 @@
 
                                                                 ?></td>
                                         <td><?php echo $a->no_hp; ?></td>
+                                        <td><?php echo $a->email; ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

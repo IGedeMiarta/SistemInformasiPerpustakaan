@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Home</h1>
+                    <h1 class="m-0 text-dark">Buku</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url('petugas') ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('admin'); ?>">Home</a></li>
                         <li class="breadcrumb-item active">Buku</li>
                     </ol>
                 </div><!-- /.col -->
@@ -23,10 +23,6 @@
         <div class="container-fluid">
             <!-- start -->
             <div class="card">
-                <div class="card-header">
-                    <a href="<?php echo base_url() . 'petugas/buku_tambah' ?>" class='btn btn-sm btn-success pull-right'><i class="fa fa-plus"></i> Buku Baru</a>
-
-                </div>
                 <div class="card-body">
 
                     <div class="table-responsive">
@@ -41,7 +37,6 @@
                                     <th width="10%">Penerbit</th>
                                     <th width="10%">Stok <small>(Tersedia/Total)</small></th>
                                     <th width="11%">Detail Buku</th>
-                                    <th width="10%">Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,34 +53,9 @@
                                         <td><?php echo $b->penulis; ?></td>
                                         <td><?php echo $b->penerbit; ?></td>
                                         <td><?php echo $b->stok2; ?>/<?php echo $b->stok; ?></td>
-
                                         <td>
-                                            <div class="btn-group ">
-                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <strong>Opsi</strong>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <?php if ($b->status_buku == 1) { ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_detail/' . $b->id_buku; ?>"><i class="far fa-fw fa-eye"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_detail_tambah/' . $b->id_buku; ?>"><i class="fas fa-fw fa-plus"></i> Tambah</a>
-                                                    <?php } else {
-                                                    ?>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_detail_tambah/' . $b->id_buku; ?>"><i class="fas fa-fw fa-plus"></i> Tambah</a>
-                                                    <?php } ?>
-                                                </div>
-                                            </div>
-                                        </td>
+                                            <a class="btn btn-warning btn-sm" href="<?php echo base_url() . 'admin/buku_detail/' . $b->id_buku; ?>"><i class="fas fa-external-link-alt"></i> Lihat</a>
 
-                                        <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <strong>Opsi</strong>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_edit/' . $b->id_buku; ?>"><i class="far fa-fw fa-edit"></i> Edit</a>
-                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_hapus/' . $b->id_buku; ?>"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a>
-                                                </div>
-                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -98,10 +68,6 @@
 
                 </div>
             </div>
-
-
-
-
             <!-- end -->
         </div><!-- /.container-fluid -->
     </div>
