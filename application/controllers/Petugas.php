@@ -801,10 +801,10 @@ class Petugas extends CI_Controller
 	function pemesanan()
 	{
 		$data['pemesanan'] = $this->db->query("SELECT pemesanan.id_pesan,pemesanan.buku, pemesanan.nama_pemesan, waktu_pesan, pemesanan.status, anggota.nama, anggota.nis,anggota.kelas,buku.judul,buku.penulis, COUNT(IF(detail_buku.status!=2,1,null))AS stok FROM pemesanan,anggota,buku,detail_buku
-WHERE pemesanan.nama_pemesan=anggota.nis
-AND pemesanan.buku=buku.id_buku
-AND buku.id_buku=detail_buku.id_buku
-GROUP BY id_pesan DESC")->result();
+				WHERE pemesanan.nama_pemesan=anggota.nis
+				AND pemesanan.buku=buku.id_buku
+				AND buku.id_buku=detail_buku.id_buku
+				GROUP BY id_pesan DESC")->result();
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
 
@@ -814,6 +814,7 @@ GROUP BY id_pesan DESC")->result();
 		$this->load->view('petugas/pemesanan', $data);
 		$this->load->view('petugas/templates/footer');
 	}
+
 	function pemesanan_valid($id_pesan)
 	{
 		$where = array(
