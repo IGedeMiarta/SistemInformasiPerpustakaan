@@ -24,8 +24,7 @@
         <div class="container-fluid">
             <!-- start -->
             <div class="card">
-                <div class="card-header text-center">
-                </div>
+
                 <div class="card-body">
                     <?php foreach ($buku as $b) { ?>
                         <form method="post" action="<?php echo base_url() . 'petugas/buku_update'; ?>" enctype="multipart/form-data">
