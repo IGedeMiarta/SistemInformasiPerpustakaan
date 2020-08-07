@@ -23,8 +23,8 @@
         <div class="container-fluid">
             <!-- start -->
             <div class="card">
-
-                <div class="card-body">
+                <?php echo $this->session->flashdata('messege'); ?>
+                <div class="card-body mt-1">
 
 
                     <?php

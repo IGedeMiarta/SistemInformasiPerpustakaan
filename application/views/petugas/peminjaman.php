@@ -33,12 +33,13 @@
                             <thead>
                                 <tr>
                                     <th width="1%">No</th>
+
+                                    <th>Peminjam</th>
                                     <th>Kode Buku</th>
                                     <th>Buku</th>
-                                    <th>Peminjam</th>
                                     <th>Mulai Pinjam</th>
                                     <th>Batas Pinjam</th>
-                                    <th>Tanggal Kembali</th>
+
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -51,17 +52,13 @@
 
                                     <tr>
                                         <td><?php echo $no++; ?></td>
+
+                                        <td><?php echo $p->nama; ?></td>
                                         <td><?php echo $p->Id_detail; ?></td>
                                         <td><?php echo $p->judul; ?></td>
-                                        <td><?php echo $p->nama; ?></td>
                                         <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_mulai)); ?></td>
                                         <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_sampai)); ?></td>
-                                        <td class="text-center" width="10px">
-                                            <?php if ($p->peminjaman_status == 2) {
-                                                echo "-";
-                                            } else {
-                                                echo date('d-m-Y', strtotime($p->tanggal_kembali));
-                                            } ?></td>
+
                                         <td>
                                             <?php
                                             if ($p->peminjaman_status == "1") {
@@ -115,9 +112,8 @@
                             <thead>
                                 <tr>
                                     <th width="1%">No</th>
-                                    <th>Kode Buku</th>
-                                    <th>Buku</th>
                                     <th>Peminjam</th>
+                                    <th>Buku</th>
                                     <th>Mulai Pinjam</th>
                                     <th>Batas Pinjam</th>
                                     <th>Tanggal Kembali</th>
@@ -133,9 +129,8 @@
 
                                     <tr>
                                         <td><?php echo $no++; ?></td>
-                                        <td><?php echo $p->Id_detail; ?></td>
-                                        <td><?php echo $p->judul; ?></td>
                                         <td><?php echo $p->nama; ?></td>
+                                        <td><?php echo $p->judul; ?></td>
                                         <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_mulai)); ?></td>
                                         <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_sampai)); ?></td>
                                         <td class="text-center" width="10px">

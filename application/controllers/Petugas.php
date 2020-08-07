@@ -551,27 +551,38 @@ class Petugas extends CI_Controller
 		$tanggal_mulai = date("Y-m-d");
 		$tanggal_sampai = date("Y-m-d", strtotime("$tanggal_mulai + 7 days"));
 
-		$data = array(
-			'peminjaman_buku' => $id_detail,
-			'peminjaman_anggota' => $anggota,
-			'peminjaman_tanggal_mulai' => $tanggal_mulai,
-			'peminjaman_tanggal_sampai' => $tanggal_sampai,
-			'peminjaman_status' => 2
-		);
+		$cek = $this->db->query("SELECT peminjaman_id,peminjaman_buku, peminjaman_anggota,peminjaman_status,nama, 
+		COUNT(IF(peminjaman_anggota=$anggota,1,null))AS jml_pinjam 
+		FROM peminjaman, anggota 
+		WHERE peminjaman_anggota=nis 
+		AND peminjaman_status=2")->row_array();
 
-		// insert data ke database
-		$this->m_data->insert_data($data, 'peminjaman');
+		if ($cek['jml_pinjam'] <= 2) {
+			$data = array(
+				'peminjaman_buku' => $id_detail,
+				'peminjaman_anggota' => $anggota,
+				'peminjaman_tanggal_mulai' => $tanggal_mulai,
+				'peminjaman_tanggal_sampai' => $tanggal_sampai,
+				'peminjaman_status' => 2
+			);
 
-		// mengubah status buku menjadi di pinjam (2)
-		$w = array(
-			'id_detail' => $id_detail
-		);
-		$d = array(
-			'status' => 2
-		);
-		$this->m_data->update_data($w, $d, 'detail_buku');
+			// insert data ke database
+			$this->m_data->insert_data($data, 'peminjaman');
 
-		redirect(base_url() . 'petugas/peminjaman_siswa/' . $anggota);
+			// mengubah status buku menjadi di pinjam (2)
+			$w = array(
+				'id_detail' => $id_detail
+			);
+			$d = array(
+				'status' => 2
+			);
+			$this->m_data->update_data($w, $d, 'detail_buku');
+
+			redirect(base_url() . 'petugas/peminjaman_siswa/' . $anggota);
+		} else {
+			$this->session->set_flashdata('messege', '<div class="alert alert-warning" role="alert">Anggota Tersebut Sudah Melebihi Batas Pinjam! <strong>Max Peminjaman Adalah 3 Buku!</strong></div>');
+			redirect('petugas/peminjaman_siswa/' . $anggota);
+		}
 	}
 
 	function peminjaman_batalkan($id)
@@ -915,34 +926,45 @@ class Petugas extends CI_Controller
 		$tanggal_mulai = date("Y-m-d");
 		$tanggal_sampai = date("Y-m-d", strtotime("$tanggal_mulai + 7 days"));
 
-		$data = array(
-			'peminjaman_buku' => $id_detail,
-			'peminjaman_anggota' => $anggota,
-			'peminjaman_tanggal_mulai' => $tanggal_mulai,
-			'peminjaman_tanggal_sampai' => $tanggal_sampai,
-			'peminjaman_status' => 2
-		);
+		$cek = $this->db->query("SELECT peminjaman_id,peminjaman_buku, peminjaman_anggota,peminjaman_status,nama, 
+		COUNT(IF(peminjaman_anggota=$anggota,1,null))AS jml_pinjam 
+		FROM peminjaman, anggota 
+		WHERE peminjaman_anggota=nis 
+		AND peminjaman_status=2")->row_array();
 
-		// insert data ke database
-		$this->m_data->insert_data($data, 'peminjaman');
+		if ($cek['jml_pinjam'] <= 2) {
+			$data = array(
+				'peminjaman_buku' => $id_detail,
+				'peminjaman_anggota' => $anggota,
+				'peminjaman_tanggal_mulai' => $tanggal_mulai,
+				'peminjaman_tanggal_sampai' => $tanggal_sampai,
+				'peminjaman_status' => 2
+			);
 
-		// mengubah status buku menjadi di pinjam (2)
-		$w = array(
-			'id_detail' => $id_detail
-		);
-		$d = array(
-			'status' => 2
-		);
-		$this->m_data->update_data($w, $d, 'detail_buku');
+			// insert data ke database
+			$this->m_data->insert_data($data, 'peminjaman');
 
-		$where = array(
-			'id_pesan' => $pesan
-		);
-		$dt = array(
-			'status' => 4
-		);
-		$this->m_data->update_data($where, $dt, 'pemesanan');
-		redirect(base_url() . 'petugas/peminjaman_siswa/' . $anggota);
+			// mengubah status buku menjadi di pinjam (2)
+			$w = array(
+				'id_detail' => $id_detail
+			);
+			$d = array(
+				'status' => 2
+			);
+			$this->m_data->update_data($w, $d, 'detail_buku');
+
+			$where = array(
+				'id_pesan' => $pesan
+			);
+			$dt = array(
+				'status' => 4
+			);
+			$this->m_data->update_data($where, $dt, 'pemesanan');
+			redirect(base_url() . 'petugas/peminjaman_siswa/' . $anggota);
+		} else {
+			$this->session->set_flashdata('messege', '<div class="alert alert-warning" role="alert">Anggota Tersebut Sudah Melebihi Batas Pinjam! <strong>Max Peminjaman Adalah 3 Buku!</strong></div>');
+			redirect('petugas/peminjaman_siswa/' . $anggota);
+		}
 	}
 
 	function laporan_buku()

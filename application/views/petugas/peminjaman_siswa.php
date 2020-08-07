@@ -23,14 +23,13 @@
         <div class="container-fluid">
             <!-- start -->
             <div class="card">
-
+                <?php echo $this->session->flashdata('messege'); ?>
                 <div class="card-header">
 
                     <?php
                     $id_detail = "0";
                     $nik = "0";
                     ?>
-
                     <form method="post" action="<?php echo base_url() . 'petugas/peminjaman_aksi'; ?>">
                         <div class="form-group">
                             <label class="font-weight-bold" for="penulis">Anggota</label>
