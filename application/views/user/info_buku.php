@@ -58,7 +58,7 @@
                                                 <tr>
                                                     <th>Stok</th>
                                                     <td> : </td>
-                                                    <td><?= $d->stok; ?>/<?= $d->stok2; ?></td>
+                                                    <td><?= $d->stok; ?></td>
                                                 </tr>
                                             </table>
 
@@ -99,7 +99,7 @@
                                 <th>Judul Buku</th>
                                 <th>Tahun Terbit</th>
                                 <th>Penulis</th>
-                                <th class="text-center">Stok <small>(tersedia/total)</small></th>
+                                <th class="text-center">Stok</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +113,7 @@
                                     <td><?php echo $b->judul; ?></td>
                                     <td class="text-center"><?php echo $b->tahun; ?></td>
                                     <td><?php echo $b->penulis; ?></td>
-                                    <td class="text-center"><?php echo $b->stok2; ?>/<?= $b->stok; ?></td>
+                                    <td class="text-center"><?php echo $b->stok2; ?></td>
 
                                 </tr>
                             <?php
@@ -125,11 +125,6 @@
 
             </div>
         </div>
-
-
-
-
-
         <!-- end -->
         </div><!-- /.container-fluid -->
     </div>

@@ -7,9 +7,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center text-white">
-                            <h5 class="home-small-title text-uppercase text-white-50 mb-4">Awesome Design</h5>
-                            <h2 class="home-title mb-4">30 years of successful business consulting</h2>
-                            <p class="home-desc text-white-50 mx-auto">Maecenas class semper class semper sollicitudin lectus lorem iaculis imperdiet aliquam vehicula tempor auctor curabitur pede aenean ornare.</p>
+                            <h5 class="home-small-title text-uppercase text-white-50 mb-4">Selamat Datang</h5>
+                            <h2 class="home-title mb-4">SMP NEGERI 1 SELEMADEG TIMUR</h2>
+                            <p class="home-desc text-white-50 mx-auto">”UNGGUL DALAM PRESTASI, DISIPLIN DAN BERBUDAYA”</p>
                             <div class="text-center pt-4">
                                 <a href="#" class="btn btn-custom">View More <i class="mdi mdi-arrow-right ml-2"></i></a>
                             </div>
@@ -21,10 +21,66 @@
     </div>
 </section>
 <!-- HOME END-->
+<!-- BLOG START -->
+<section class="section bg-light" id="blog">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center">
+                    <h4 class="title-heading text-uppercase">latest Blog</h4>
+                    <p class="title-desc text-muted">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="blog-menu mt-4">
+                    <img src="<?= base_url() . 'assets/borial/images/blog/1.jpg' ?>" class="img-fluid" alt="">
+                    <div>
+                        <h5 class="mt-4">UI & UX Design</h5>
+                        <h4><a href="" class="blog-title">Web Developer Bootcamp</a></h4>
+                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
+                        <div class="mt-3">
+                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-menu mt-4">
+                    <img src="<?= base_url() . 'assets/borial/images/blog/2.jpg' ?>" class="img-fluid" alt="">
+                    <div>
+                        <h5 class="mt-4">Digital Marketing</h5>
+                        <h4><a href="" class="blog-title">How to Growth Hacking</a></h4>
+                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
+                        <div class="mt-3">
+                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog-menu mt-4">
+                    <img src="<?= base_url() . 'assets/borial/images/blog/3.jpg' ?>" class="img-fluid" alt="">
+                    <div>
+                        <h5 class="mt-4">Apps Design</h5>
+                        <h4><a href="" class="blog-title">IOS App Development</a></h4>
+                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
+                        <div class="mt-3">
+                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- BLOG END -->
 
 
 <!-- SERVICES START -->
-<section class="section bg-light" id="service">
+<!-- <section class="section bg-light" id="service">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -94,7 +150,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- SERVICES END -->
 
 <!-- PORTFOLIO START-->
@@ -103,8 +159,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="text-center">
-                    <h4 class="title-heading">Amazing Work</h4>
-                    <p class="title-desc text-muted">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime</p>
+                    <h4 class="title-heading">Ekstrakulikuler</h4>
+                    <p class="title-desc text-muted">ekstrakurikuler berfungsi untuk mendukung perkembangan personal peserta didik melalui perluasan minat, pengembangan potensi, dan pemberian kesempatan untuk pembentukan karakter dan pelatihan kepemimpinan.</p>
                 </div>
             </div>
         </div>
@@ -130,14 +186,15 @@
     <!-- Gallary -->
     <div class="container-fluid">
         <div class="row container-grid mt-5 projects-wrapper">
+
             <div class="img-max-width">
                 <div class="item-box">
-                    <a class="cbox-gallary1 mfp-image" href="<?= base_url() . 'assets/borial/images/portfolio/work-1.jpg' ?>" title="Project Name">
-                        <img class="item-container profile business" src="<?= base_url() . 'assets/borial/images/portfolio/work-1.jpg' ?>" alt="1" />
+                    <a class="cbox-gallary1 mfp-image" href="<?= base_url() . 'assets/borial/images/portfolio/work-2.jpg' ?>" title="Project Name">
+                        <img class="item-container profile business" src="<?= base_url() . 'img/ekstra/pramuka.jpg' ?>" alt="1" />
                         <div class="item-mask">
                             <div class="item-caption">
-                                <h5 class="text-light">Project Name</h5>
-                                <p class="text-light">client: Donald Jerry</p>
+                                <h5 class="text-light">Pramuka</h5>
+
                             </div>
                         </div>
                     </a>
@@ -146,12 +203,12 @@
 
             <div class="img-max-width business finance">
                 <div class="item-box">
-                    <a class="cbox-gallary1 mfp-image" href="<?= base_url() . 'assets/borial/images/portfolio/work-2.jpg' ?>" title="Project Name">
-                        <img class="item-container mfp-fade" src="<?= base_url() . 'assets/borial/images/portfolio/work-2.jpg' ?>" alt="2" />
+                    <a class="cbox-gallary1 mfp-image" href="<?= base_url() . 'img/ekstra/osis.jpg' ?>" title="Project Name">
+                        <img class="item-container mfp-fade" src="<?= base_url() . 'img/ekstra/osis.jpg' ?>" alt="2" />
                         <div class="item-mask">
                             <div class="item-caption">
-                                <h5 class="text-light">Project Name</h5>
-                                <p class="text-light">client: Donald Jerry</p>
+                                <h5 class="text-light">OSIS</h5>
+
                             </div>
                         </div>
                     </a>
@@ -387,62 +444,6 @@
 </section>
 <!-- END CTA -->
 
-<!-- BLOG START -->
-<section class="section bg-light" id="blog">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="text-center">
-                    <h4 class="title-heading text-uppercase">latest Blog</h4>
-                    <p class="title-desc text-muted">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-lg-4">
-                <div class="blog-menu mt-4">
-                    <img src="<?= base_url() . 'assets/borial/images/blog/1.jpg' ?>" class="img-fluid" alt="">
-                    <div>
-                        <h5 class="mt-4">UI & UX Design</h5>
-                        <h4><a href="" class="blog-title">Web Developer Bootcamp</a></h4>
-                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
-                        <div class="mt-3">
-                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="blog-menu mt-4">
-                    <img src="<?= base_url() . 'assets/borial/images/blog/2.jpg' ?>" class="img-fluid" alt="">
-                    <div>
-                        <h5 class="mt-4">Digital Marketing</h5>
-                        <h4><a href="" class="blog-title">How to Growth Hacking</a></h4>
-                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
-                        <div class="mt-3">
-                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="blog-menu mt-4">
-                    <img src="<?= base_url() . 'assets/borial/images/blog/3.jpg' ?>" class="img-fluid" alt="">
-                    <div>
-                        <h5 class="mt-4">Apps Design</h5>
-                        <h4><a href="" class="blog-title">IOS App Development</a></h4>
-                        <p class="mt-2 text-muted">Lorem ipsum dolor consectetur elit adipiscing tha seding do eiusmod tempor.</p>
-                        <div class="mt-3">
-                            <a href="" class="read-btn">Read More <i class="mdi mdi-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- BLOG END -->
 
 <!-- CONTACT START -->
 <section class="section" id="contact">

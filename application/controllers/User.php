@@ -82,6 +82,7 @@ class User extends CI_Controller
         $this->load->view('user/v_pemesanan', $data);
         $this->load->view('templates_user/footer');
     }
+    
     public function pemesanan_tambah()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -223,11 +224,16 @@ class User extends CI_Controller
 
     public function info_buku($id_buku)
     {
-        // SELECT detail_buku.id_buku,judul,tahun,penulis,penerbit,ket,COUNT(detail_buku.id_buku) AS stok,status FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku AND detail_buku.status=1 GROUP by id_buku
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['sesi'] = $this->db->get_where('anggota', ['id_login' => $this->session->userdata('id_login')])->row_array();
-        $data['buku'] = $this->db->query("SELECT detail_buku.id_buku,gambar,judul,tahun,penulis,penerbit,ket,COUNT(detail_buku.id_buku) AS stok, COUNT(IF(detail_buku.status!=2,1,null))AS stok2 FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku  GROUP by id_buku")->result();
-        $data['info'] = $this->db->query("SELECT detail_buku.id_buku,gambar,judul,tahun,penulis,penerbit,ket, COUNT(IF(detail_buku.status!=2,1,null))AS stok,COUNT(detail_buku.id_buku) AS stok2 FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku AND detail_buku.id_buku=\"$id_buku\"")->result();
+        $data['buku'] = $this->db->query("SELECT detail_buku.id_buku,gambar,judul,tahun,penulis,penerbit,ket,
+                COUNT(detail_buku.id_buku) AS stok, COUNT(IF(detail_buku.status!=2,1,null))AS stok2 
+                FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku  
+                GROUP by id_buku")->result();
+        $data['info'] = $this->db->query("SELECT detail_buku.id_buku,gambar,judul,tahun,penulis,penerbit,ket, 
+                COUNT(IF(detail_buku.status!=2,1,null))AS stok,COUNT(detail_buku.id_buku) AS stok2 
+                FROM buku,detail_buku WHERE buku.id_buku=detail_buku.id_buku 
+                AND detail_buku.id_buku=\"$id_buku\"")->result();
 
         $this->load->view('templates_user/header', $data);
         $this->load->view('templates_user/navbar', $data);

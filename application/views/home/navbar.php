@@ -1,7 +1,8 @@
  <!-- NAVBAR -->
  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky">
      <div class="container">
-         <a class="navbar-brand logo" href="#">SMPENSATIM</a>
+
+         <a class="navbar-brand logo" href="#">smpn 1 selemadeg timur</a>
          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
              <i class="mdi mdi-menu"></i>
          </button>
@@ -11,10 +12,13 @@
                      <a class="nav-link" href="#home">Home</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#service">Services</a>
+                     <a class="nav-link" href="#blog">Blog</a>
                  </li>
+                 <!-- <li class="nav-item">
+                     <a class="nav-link" href="#service">Services</a>
+                 </li> -->
                  <li class="nav-item">
-                     <a class="nav-link" href="#portfolio">Portfolio</a>
+                     <a class="nav-link" href="#portfolio">Ekstrakulikuler</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="#client">Clients</a>
@@ -22,9 +26,7 @@
                  <li class="nav-item">
                      <a class="nav-link" href="#team">Team</a>
                  </li>
-                 <li class="nav-item">
-                     <a class="nav-link" href="#blog">Blog</a>
-                 </li>
+
                  <li class="nav-item">
                      <a class="nav-link" href="#contact">Contact</a>
                  </li>
