@@ -100,13 +100,19 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user fa-sm fa-fw"></i>
+                                <i class="fas fa-caret-right nav-icon"></i>
                                 <p>My Profile</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?php echo base_url() . 'petugas/ubah_password' ?>" class="nav-link">
+                                <i class="fas fa-caret-right nav-icon"></i>
+                                <p>Ubah Password</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-fw"></i>
+                                <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Logout</p>
                             </a>
                         </li>

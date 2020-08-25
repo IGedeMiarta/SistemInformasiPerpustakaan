@@ -16,7 +16,7 @@
 
                 <li class="nav-header">FEATURE</li>
                 <li class="nav-item">
-                    <a href="<?= base_url('kepsek'); ?>" class="nav-link">
+                    <a href="<?= base_url('kepsek/petugas'); ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-users-cog"></i>
                         <p>
                             Petugas
@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('kepsek/anggota'); ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-users"></i>
                         <p>
                             Anggota
@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('kepsek/buku'); ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-book"></i>
                         <p>
                             Buku
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('kepsek/peminjaman'); ?>" class="nav-link">
                         <i class="nav-icon fab fa-fw fa-buffer"></i>
                         <p>
                             Peminjaman
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('kepsek/pemesanan'); ?>" class="nav-link">
                         <i class="nav-icon fas fa-fw fa-mail-bulk"></i>
                         <p>
                             Pemesanan Buku
@@ -65,19 +65,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'petugas/laporan_buku'; ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'kepsek/laporan_buku'; ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?php echo base_url() . 'petugas/peminjaman_laporan'; ?>" class="nav-link">
+                            <a href="<?php echo base_url() . 'kepsek/laporan_peminjaman'; ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Peminajaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url() . 'petugas/laporan_pemesanan' ?>" class="nav-link">
+                            <a href="<?= base_url() . 'kepsek/laporan_pemesanan' ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Pemesanan</p>
                             </a>
@@ -87,8 +87,16 @@
 
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
+                    <a href="<?= base_url('kepsek/ubah_password'); ?>" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-unlock-alt"></i>
+                        <p>
+                            Ubah Password
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-fw"></i>
+                        <i class="nav-icon fas fa-fw fa-sign-out-alt"></i>
                         <p>Logout</p>
                     </a>
                 </li>

@@ -82,7 +82,7 @@ class User extends CI_Controller
         $this->load->view('user/v_pemesanan', $data);
         $this->load->view('templates_user/footer');
     }
-    
+
     public function pemesanan_tambah()
     {
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
@@ -269,6 +269,40 @@ class User extends CI_Controller
             // insert data ke database
             $this->m_data->insert_data($data, 'pemesanan');
             redirect('user/pemesanan/' . $nis);
+        }
+    }
+
+    function ubah_password()
+    {
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Password tidak cocok!',
+            'min_length' => 'Password terlelu pendek!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+            $data['sesi'] = $this->db->get_where('anggota', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+            $this->load->view('templates_user/header', $data);
+            $this->load->view('templates_user/navbar', $data);
+            $this->load->view('templates_user/sidebar', $data);
+            $this->load->view('user/ubah_password', $data);
+            $this->load->view('templates_user/footer');
+        } else {
+
+            $where = [
+                'id_login' => $this->input->post('id')
+            ];
+            $data = [
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            ];
+
+            $this->m_data->update_data($where, $data, 'user');
+            $this->session->set_flashdata('messege', '<script>
+			alert("Password Berhasil Diubah!");
+		</script>');
+            redirect('user/ubah_password');
         }
     }
 }

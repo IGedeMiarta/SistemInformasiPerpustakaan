@@ -78,8 +78,16 @@
 
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
+                    <a href="<?= base_url('admin/ubah_password'); ?>" class="nav-link">
+                        <i class="nav-icon fas fa-fw fa-unlock-alt"></i>
+                        <p>
+                            Ubah Password
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-fw"></i>
+                        <i class="nav-icon fas fa-sign-out-alt fa-fw"></i>
                         <p>Logout</p>
                     </a>
                 </li>

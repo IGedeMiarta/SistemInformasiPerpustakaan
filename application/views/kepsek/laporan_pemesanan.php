@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url() . 'admin' ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url() . 'kepsek' ?>">Home</a></li>
                         <li class="breadcrumb-item active">Laporan Pemesanan</li>
                     </ol>
                 </div><!-- /.col -->
@@ -57,7 +57,7 @@
                         $mulai = $_GET['tanggal_mulai'];
                         $sampai = $_GET['tanggal_sampai'];
                     ?>
-                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'admin/laporan_pesan_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
+                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'kepsek/laporan_pesan_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
                     <?php
                     }
                     ?>

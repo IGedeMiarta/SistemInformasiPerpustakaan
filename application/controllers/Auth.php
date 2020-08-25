@@ -64,6 +64,13 @@ class Auth extends CI_Controller
 						$this->session->set_userdata($data);
 						redirect('petugas');
 					} else if ($user['role'] == 3) {
+						$data = [
+							'id_login' => $user['id_login'],
+							'email' => $user['email'],
+							'role_id' => $user['role_id'],
+							'status' => 'login_kepsek'
+						];
+						$this->session->set_userdata($data);
 						redirect('kepsek');
 					} else {
 						$data = [

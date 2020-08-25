@@ -25,7 +25,6 @@
 
                  <a class="dropdown-item" href="<?php echo base_url() . 'admin/ubah_password' ?>">
                      <i class="fas fa-unlock-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-
                      Ubah Password
                  </a>
                  <div class="dropdown-divider"></div>

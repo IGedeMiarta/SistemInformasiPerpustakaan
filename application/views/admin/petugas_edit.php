@@ -24,9 +24,6 @@
         <div class="container-fluid">
             <!-- start -->
             <div class="card">
-                <div class="card-header text-center">
-                    <h4>Edit Anggota</h4>
-                </div>
                 <div class="card-body">
                     <?php foreach ($petugas as $a) { ?>
                         <form method="post" action="<?php echo base_url() . 'admin/petugas_edit_aksi'; ?>">
@@ -45,12 +42,13 @@
                             <div class="row">
                                 <div class="input-group col-sm-6 mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="inputGroup-sizing-default">+62</span>
+                                        <span class="input-group-text" id="inputGroup-sizing-default">Hp</span>
                                     </div>
                                     <input type="number" class="form-control form-control-user" id="no_hp" name="no_hp" placeholder="No Hp." required value="<?= $a->no_hp ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
+
                                         <select class="custom-select" name="jenkel">
                                             <option selected value="<?= $a->jenkel; ?>">
                                                 <?php if ($a->jenkel == 'L') {

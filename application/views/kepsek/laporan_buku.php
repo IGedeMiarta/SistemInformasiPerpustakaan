@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Laporan Pemesanan</h1>
+                    <h1 class="m-0 text-dark">Laporan Buku</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url() . 'admin' ?>">Home</a></li>
-                        <li class="breadcrumb-item active">Laporan Pemesanan</li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url() . 'petugas' ?>">Home</a></li>
+                        <li class="breadcrumb-item active">Laporan Buku</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -57,53 +57,40 @@
                         $mulai = $_GET['tanggal_mulai'];
                         $sampai = $_GET['tanggal_sampai'];
                     ?>
-                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'admin/laporan_pesan_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
+                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'kepsek/laporan_buku_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
                     <?php
                     }
                     ?>
-
                 </div>
             </div>
 
+
             <div class="card">
                 <div class="card-body">
-
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover table-datatable">
                             <thead>
                                 <tr>
                                     <th width="1%">No</th>
                                     <th>Tanggal Masuk</th>
-                                    <th>Nis</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
+                                    <th>ID Buku</th>
+                                    <th>Id Detail Buku</th>
                                     <th>Buku</th>
-                                    <th>Status</th>
+                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
-                                foreach ($pemesanan as $b) {
+                                foreach ($book as $b) {
                                 ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
-                                        <td><?php echo date('d-m-Y', strtotime($b->waktu_pesan)); ?></td>
-                                        <td><?php echo $b->nis ?></td>
-                                        <td><?php echo $b->nama; ?></td>
-                                        <td><?php echo $b->kelas; ?></td>
+                                        <td><?php echo date('d-m-Y', strtotime($b->tgl_masuk)); ?></td>
+                                        <td><?php echo $b->id_buku ?></td>
+                                        <td><?php echo $b->id_detail; ?></td>
                                         <td><?php echo $b->judul; ?></td>
-                                        <td class="text-center"><?php if ($b->status == 1) {
-                                                                    echo "<div class='badge badge-danger text-italic'>menunggu konfirmasi</div>";
-                                                                } else if ($b->status == 2) {
-                                                                    echo "<div class='badge badge-warning'>pending</div>";
-                                                                } else if ($b->status == 3) {
-                                                                    echo "<div class='badge badge-success'>ready</div>";
-                                                                } else if ($b->status == 4) {
-                                                                    echo "<div class='badge badge-info'>selesai</div>";
-                                                                } else {
-                                                                    echo "<div class='badge badge-secondary'>dibatalkan!</div>";
-                                                                } ?></td>
+                                        <td><?php echo $b->ket; ?></td>
                                     </tr>
                                 <?php
                                 }
@@ -113,6 +100,7 @@
                     </div>
                 </div>
             </div>
+
 
 
 

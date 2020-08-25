@@ -1039,4 +1039,38 @@ class Petugas extends CI_Controller
 			redirect(base_url() . 'petugas/laporan_buku');
 		}
 	}
+
+	function ubah_password()
+	{
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+			'matches' => 'Password tidak cocok!',
+			'min_length' => 'Password terlelu pendek!'
+		]);
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+
+		if ($this->form_validation->run() == false) {
+			$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+			$data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+			$this->load->view('petugas/templates/header', $data);
+			$this->load->view('petugas/templates/navbar', $data);
+			$this->load->view('petugas/templates/sidebar', $data);
+			$this->load->view('petugas/ubah_password', $data);
+			$this->load->view('petugas/templates/footer');
+		} else {
+
+			$where = [
+				'id_login' => $this->input->post('id')
+			];
+			$data = [
+				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+			];
+
+			$this->m_data->update_data($where, $data, 'user');
+			$this->session->set_flashdata('messege', '<script>
+			alert("Password Berhasil Diubah!");
+		</script>');
+			redirect('petugas/ubah_password');
+		}
+	}
 }

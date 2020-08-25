@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Laporan Pemesanan</h1>
+                    <h3 class="m-0 text-dark">Laporan Peminjaman</h3>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?php echo base_url() . 'admin' ?>">Home</a></li>
-                        <li class="breadcrumb-item active">Laporan Pemesanan</li>
+                        <li class="breadcrumb-item active">Laporan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -22,6 +22,7 @@
     <div class="content">
         <div class="container-fluid">
             <!-- start -->
+
             <div class="card">
 
                 <div class="card-body">
@@ -35,75 +36,71 @@
 
                                     <form method="get" action="">
                                         <div class="form-group">
-                                            <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai</label>
+                                            <label class="font-weight-bold" for="tanggal_mulai">Tanggal Mulai Pinjam</label>
                                             <input type="date" class="form-control" name="tanggal_mulai" placeholder="Masukkan tanggal mulai pinjam">
                                         </div>
                                         <div class="form-group">
-                                            <label class="font-weight-bold" for="tanggal_sampai">Tanggal Sampai</label>
+                                            <label class="font-weight-bold" for="tanggal_sampai">Tanggal Pinjam Sampai</label>
                                             <input type="date" class="form-control" name="tanggal_sampai" placeholder="Masukkan tanggal pinjam sampai">
                                         </div>
                                         <input type="submit" class="btn btn-primary" value="Filter">
                                     </form>
 
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
+
+                    <br />
                     <?php
                     // membuat tombol cetak jika data sudah di filter
                     if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
                         $mulai = $_GET['tanggal_mulai'];
                         $sampai = $_GET['tanggal_sampai'];
                     ?>
-                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'admin/laporan_pesan_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
+                        <a class='btn btn-primary' target="_blank" href='<?php echo base_url() . 'kepsek/laporan_pinjam_cetak?tanggal_mulai=' . $mulai . '&tanggal_sampai=' . $sampai ?>'><i class='fa fa-print'></i> CETAK</a>
                     <?php
                     }
                     ?>
 
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-body">
-
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped table-hover table-datatable">
                             <thead>
                                 <tr>
                                     <th width="1%">No</th>
-                                    <th>Tanggal Masuk</th>
-                                    <th>Nis</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
+                                    <th>Id Buku</th>
                                     <th>Buku</th>
+                                    <th>Peminjam</th>
+                                    <th>Mulai Pinjam</th>
+                                    <th>Pinjam Sampai</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
-                                foreach ($pemesanan as $b) {
+                                foreach ($peminjaman as $p) {
                                 ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
-                                        <td><?php echo date('d-m-Y', strtotime($b->waktu_pesan)); ?></td>
-                                        <td><?php echo $b->nis ?></td>
-                                        <td><?php echo $b->nama; ?></td>
-                                        <td><?php echo $b->kelas; ?></td>
-                                        <td><?php echo $b->judul; ?></td>
-                                        <td class="text-center"><?php if ($b->status == 1) {
-                                                                    echo "<div class='badge badge-danger text-italic'>menunggu konfirmasi</div>";
-                                                                } else if ($b->status == 2) {
-                                                                    echo "<div class='badge badge-warning'>pending</div>";
-                                                                } else if ($b->status == 3) {
-                                                                    echo "<div class='badge badge-success'>ready</div>";
-                                                                } else if ($b->status == 4) {
-                                                                    echo "<div class='badge badge-info'>selesai</div>";
-                                                                } else {
-                                                                    echo "<div class='badge badge-secondary'>dibatalkan!</div>";
-                                                                } ?></td>
+                                        <td><?php echo $p->peminjaman_buku; ?></td>
+                                        <td><?php echo $p->judul; ?></td>
+                                        <td><?php echo $p->nama; ?></td>
+                                        <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_mulai)); ?></td>
+                                        <td><?php echo date('d-m-Y', strtotime($p->peminjaman_tanggal_sampai)); ?></td>
+                                        <td>
+                                            <?php
+                                            if ($p->peminjaman_status == "1") {
+                                                echo "<div class='badge badge-success'>Selesai</div>";
+                                            } else if ($p->peminjaman_status == "2") {
+                                                echo "<div class='badge badge-warning'>Dipinjam</div>";
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
                                 <?php
                                 }
@@ -111,6 +108,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
 
