@@ -215,4 +215,142 @@ class Admin extends CI_Controller
         $this->load->view('admin/pemesanan', $data);
         $this->load->view('admin/footer');
     }
+
+    function lap_peminjaman()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+
+            $data['peminjaman'] = $this->db->query("select * from peminjaman,buku,detail_buku,anggota where peminjaman.peminjaman_buku=detail_buku.id_detail AND detail_buku.id_buku=buku.id_buku and peminjaman.peminjaman_anggota=anggota.nis and date(peminjaman_tanggal_mulai) >= '$mulai' and date(peminjaman_tanggal_mulai) <= '$sampai' order by peminjaman_id desc")->result();
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+            $data['peminjaman'] = $this->db->query("select * from peminjaman,buku,detail_buku,anggota where peminjaman.peminjaman_buku=detail_buku.id_detail AND detail_buku.id_buku=buku.id_buku and peminjaman.peminjaman_anggota=anggota.nis order by peminjaman_id desc")->result();
+        }
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/laporan_peminjaman', $data);
+        $this->load->view('admin/footer');
+    }
+
+    function lap_pinjam_cetak()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['peminjaman'] = $this->db->query("SELECT peminjaman.peminjaman_buku,buku.judul,anggota.nama,anggota.nis,anggota.kelas,peminjaman.peminjaman_tanggal_mulai,peminjaman.peminjaman_tanggal_sampai,peminjaman.peminjaman_status FROM peminjaman INNER JOIN detail_buku INNER JOIN buku INNER JOIN anggota WHERE peminjaman.peminjaman_buku=detail_buku.Id_detail AND detail_buku.id_buku=buku.id_buku AND peminjaman.peminjaman_anggota=anggota.nis AND date(peminjaman_tanggal_mulai)>='$mulai' AND date(peminjaman_tanggal_sampai)<='$sampai'")->result();
+
+            $this->load->view('admin/lap_pinjam_cetak', $data);
+        } else {
+            redirect(base_url() . 'admin/lap_peminjaman');
+        }
+    }
+    function laporan_buku()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+
+            $data['book'] = $this->db->query("SELECT * FROM detail_buku INNER JOIN buku WHERE detail_buku.id_buku=buku.id_buku AND date(tgl_masuk) >='$mulai' AND date(tgl_masuk) <= '$sampai'")->result();
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+            $data['book'] = $this->db->query("SELECT * FROM detail_buku INNER JOIN buku WHERE detail_buku.id_buku=buku.id_buku")->result();
+        }
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/laporan_buku', $data);
+        $this->load->view('admin/footer');
+    }
+
+    function laporan_buku_cetak()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['book'] = $this->db->query("SELECT * FROM detail_buku INNER JOIN buku WHERE detail_buku.id_buku=buku.id_buku AND date(tgl_masuk) >='$mulai' AND date(tgl_masuk) <= '$sampai'")->result();
+            $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+            $this->load->view('admin/laporan_buku_cetak', $data);
+        } else {
+            redirect(base_url() . 'admin/laporan_buku');
+        }
+    }
+    function laporan_pemesanan()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            // SELECT anggota.nis, anggota.nama, anggota.kelas, buku.id_buku, buku.judul, pemesanan.id_pesan, pemesanan.waktu_pesan, pemesanan.status  FROM anggota INNER JOIN pemesanan ON pemesanan.nama_pemesan=anggota.nis INNER JOIN buku ON pemesanan.buku=buku.id_buku WHERE 
+            //date(waktu_pesan)>='2020-07-1' AND date(waktu_pesan)<='2020-07-16'
+            $data['pemesanan'] = $this->db->query("SELECT anggota.nis, anggota.nama, anggota.kelas, buku.id_buku, buku.judul, pemesanan.id_pesan, pemesanan.waktu_pesan, pemesanan.status  FROM anggota INNER JOIN pemesanan ON pemesanan.nama_pemesan=anggota.nis INNER JOIN buku ON pemesanan.buku=buku.id_buku  
+			WHERE date(waktu_pesan) >='$mulai' AND date(waktu_pesan) <= '$sampai'")->result();
+        } else {
+            // mengambil data peminjaman buku dari database | dan mengurutkan data dari id peminjaman terbesar ke terkecil (desc)
+            $data['pemesanan'] = $this->db->query("SELECT anggota.nis, anggota.nama, anggota.kelas, buku.id_buku, buku.judul, pemesanan.id_pesan, pemesanan.waktu_pesan, pemesanan.status  FROM anggota INNER JOIN pemesanan ON pemesanan.nama_pemesan=anggota.nis INNER JOIN buku ON pemesanan.buku=buku.id_buku")->result();
+        }
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/navbar', $data);
+        $this->load->view('admin/sidebar', $data);
+        $this->load->view('admin/laporan_pemesanan', $data);
+        $this->load->view('admin/footer');
+    }
+    function laporan_pesan_cetak()
+    {
+        if (isset($_GET['tanggal_mulai']) && isset($_GET['tanggal_sampai'])) {
+            $mulai = $this->input->get('tanggal_mulai');
+            $sampai = $this->input->get('tanggal_sampai');
+            // mengambil data peminjaman berdasarkan tanggal mulai sampai tanggal sampai
+            $data['pemesanan'] = $this->db->query("SELECT anggota.nis, anggota.nama, anggota.kelas, buku.id_buku, buku.judul, pemesanan.id_pesan, pemesanan.waktu_pesan, pemesanan.status  FROM anggota INNER JOIN pemesanan ON pemesanan.nama_pemesan=anggota.nis INNER JOIN buku ON pemesanan.buku=buku.id_buku  
+			WHERE date(waktu_pesan) >='$mulai' AND date(waktu_pesan) <= '$sampai'")->result();
+            $data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
+            $this->load->view('admin/laporan_pesan_cetak', $data);
+        } else {
+            redirect(base_url() . 'admin/laporan_buku');
+        }
+    }
+
+    function ubah_password()
+    {
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'matches' => 'Password tidak cocok!',
+            'min_length' => 'Password terlelu pendek!'
+        ]);
+        $this->form_validation->set_rules('password2', 'Password', 'required|trim|min_length[3]|matches[password1]');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/navbar');
+            $this->load->view('admin/sidebar');
+            $this->load->view('admin/ubah_password');
+            $this->load->view('admin/footer');
+        } else {
+            $where = [
+                'id_login' => 1
+            ];
+            $data = [
+                'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+            ];
+            $this->m_data->update_data($where, $data, 'user');
+
+            $this->session->set_flashdata('messege', '<script>
+			alert("Password Berhasil Diubah!");
+		</script>');
+            redirect('admin/ubah_password');
+        }
+    }
 }

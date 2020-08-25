@@ -56,19 +56,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo base_url() . 'admin/laporan_buku' ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo base_url() . 'admin/lap_peminjaman' ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Peminajaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo base_url() . 'admin/laporan_pemesanan' ?>" class="nav-link">
                                 <i class="fas fa-caret-right nav-icon"></i>
                                 <p>Laporan Pemesanan</p>
                             </a>
