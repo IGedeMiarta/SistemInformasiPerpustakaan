@@ -85,7 +85,7 @@
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_edit/' . $a->nis; ?>"><i class="fas fa-fw fa-edit"></i> Edit</a>
 
                                                     <?php } ?>
-                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_hapus/' . $a->nis; ?>"><i class="far fa-fw fa-trash-alt"></i> Hapus</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_hapus/' . $a->nis; ?>" onclick="return confirm('Yakin Menghapus?')"><i class="far fa-fw fa-trash-alt"></i> Hapus</a>
 
                                                 </div>
                                             </div>

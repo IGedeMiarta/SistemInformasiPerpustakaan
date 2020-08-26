@@ -577,7 +577,9 @@ class Petugas extends CI_Controller
 				'status' => 2
 			);
 			$this->m_data->update_data($w, $d, 'detail_buku');
-
+			$this->session->set_flashdata('messege', '<script>
+			alert("Berhasil Meminjam!");
+		</script>');
 			redirect(base_url() . 'petugas/peminjaman_siswa/' . $anggota);
 		} else {
 			$this->session->set_flashdata('messege', '<div class="alert alert-warning" role="alert">Anggota Tersebut Sudah Melebihi Batas Pinjam! <strong>Max Peminjaman Adalah 3 Buku!</strong></div>');

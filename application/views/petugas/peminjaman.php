@@ -82,7 +82,7 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_siswa/' . $p->nis; ?>"><i class="fa fa-fw fa-plus"></i> Tambah</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_selesai?id=' . $p->peminjaman_id . '&id_buku=' . $p->id_buku; ?>"><i class="fas fa-fw fa-check"></i> Selesai</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_selesai?id=' . $p->peminjaman_id . '&id_buku=' . $p->id_buku; ?>" onclick="return confirm('Buku Selesai Dipinjam?')"><i class="fas fa-fw fa-check"></i> Selesai</a>
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_riwayat/' . $p->id_buku; ?>"><i class="fas fa-fw fa-eye"></i> Riwayat Peminjaman</a>
                                                         <!-- <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_batalkan/' . $p->peminjaman_id; ?>"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a> -->
 

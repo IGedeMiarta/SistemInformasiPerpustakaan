@@ -59,7 +59,7 @@
                                                                 } else if ($b->status == 3) {
                                                                     echo "<div class='badge badge-success'>buku siap diambil</div>";
                                                                 } else if ($b->status == 4) {
-                                                                    echo "<div class='badge badge-secondary'>pemesanan selesai</div>";
+                                                                    echo "<div class='badge badge-info'>pemesanan selesai</div>";
                                                                 } else {
                                                                     echo "<div class='badge badge-secondary'>dibatalkan!</div>";
                                                                 }
