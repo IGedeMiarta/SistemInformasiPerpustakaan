@@ -854,6 +854,7 @@ class Petugas extends CI_Controller
 				WHERE pemesanan.nama_pemesan=anggota.nis
 				AND pemesanan.buku=buku.id_buku
 				AND buku.id_buku=detail_buku.id_buku
+                AND pemesanan.status>=4
 				GROUP BY id_pesan DESC")->result();
 
 		$data['pemesanan2'] = $this->db->query("SELECT pemesanan.id_pesan,pemesanan.buku, pemesanan.nama_pemesan, waktu_pesan, pemesanan.status, anggota.nama, anggota.nis,anggota.kelas,buku.judul,buku.penulis, COUNT(IF(detail_buku.status!=2,1,null))AS stok FROM pemesanan,anggota,buku,detail_buku
