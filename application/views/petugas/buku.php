@@ -83,7 +83,7 @@
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_edit/' . $b->id_buku; ?>"><i class="far fa-fw fa-edit"></i> Edit</a>
-                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_hapus/' . $b->id_buku; ?>"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/buku_hapus/' . $b->id_buku; ?>" onclick="return confirm('Yakin Hapus Buku ?')"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a>
                                                 </div>
                                             </div>
                                         </td>

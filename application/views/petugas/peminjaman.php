@@ -118,7 +118,6 @@
                                     <th>Batas Pinjam</th>
                                     <th>Tanggal Kembali</th>
                                     <th>Status</th>
-                                    <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,38 +139,9 @@
                                                 echo date('d-m-Y', strtotime($p->tanggal_kembali));
                                             } ?></td>
                                         <td>
-                                            <?php
-                                            if ($p->peminjaman_status == "1") {
-                                                echo "<div class='badge badge-success'>Selesai</div>";
-                                            } else if ($p->peminjaman_status == "2") {
-                                                echo "<div class='badge badge-warning'>Dipinjam</div>";
-                                            }
-                                            ?>
+                                            <?php echo $p->ket; ?>
                                         </td>
-                                        <td class="text-center">
 
-                                            <?php
-                                            if ($p->peminjaman_status == '1') {
-                                                echo "-";
-                                            } else if ($p->peminjaman_status == '2') {
-                                            ?>
-
-                                                <div class="btn-group ">
-                                                    <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <strong>Opsi</strong>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_siswa/' . $p->nis; ?>"><i class="fa fa-fw fa-plus"></i> Tambah</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_selesai/' . $p->peminjaman_id; ?>"><i class="fas fa-fw fa-check"></i> Selesai</a>
-                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_riwayat/' . $p->id_buku; ?>"><i class="fas fa-fw fa-eye"></i> Riwayat Peminjaman</a>
-                                                        <!-- <a class="dropdown-item" href="<?php echo base_url() . 'petugas/peminjaman_batalkan/' . $p->peminjaman_id; ?>"><i class="fas fa-fw fa-trash-alt"></i> Hapus</a> -->
-
-                                                    </div>
-                                                </div>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
                                     </tr>
                                 <?php
                                 }

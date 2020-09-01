@@ -78,6 +78,7 @@
                                                     <?php
                                                     if ($a->is_active == 'N') { ?>
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/akun/' . $a->id_login; ?>"><i class="far fa-fw fa-check-circle"></i> Aktifkan</a>
+                                                        <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_hapus/' . $a->id_login; ?>" onclick="return confirm('Yakin Menghapus?')"><i class="far fa-fw fa-trash-alt"></i> Hapus</a>
 
                                                     <?php } else { ?>
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/akun_nonaktif/' . $a->id_login; ?>"><i class="far fa-fw fa-frown"></i> Nonaktifkan</a>
@@ -85,7 +86,6 @@
                                                         <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_edit/' . $a->nis; ?>"><i class="fas fa-fw fa-edit"></i> Edit</a>
 
                                                     <?php } ?>
-                                                    <a class="dropdown-item" href="<?php echo base_url() . 'petugas/anggota_hapus/' . $a->nis; ?>" onclick="return confirm('Yakin Menghapus?')"><i class="far fa-fw fa-trash-alt"></i> Hapus</a>
 
                                                 </div>
                                             </div>

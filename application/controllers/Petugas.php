@@ -207,14 +207,15 @@ class Petugas extends CI_Controller
 	}
 
 
-	function anggota_hapus($nis)
+	function anggota_hapus($id_login)
 	{
 		$where = array(
-			'nis' => $nis
+			'id_login' => $id_login
 		);
 
 		// menghapus data anggota dari database sesuai id
 		$this->m_data->delete_data($where, 'anggota');
+		$this->m_data->delete_data($where, 'user');
 
 		// mengalihkan halaman ke halaman data anggota
 		redirect(base_url() . 'petugas/anggota');
@@ -506,7 +507,7 @@ class Petugas extends CI_Controller
 
 		$data['peminjaman2'] = $this->db->query("SELECT peminjaman.peminjaman_id, detail_buku.Id_detail, buku.judul, buku.id_buku, 
 					anggota.nama,anggota.nis,anggota.kelas, 
-					peminjaman.peminjaman_tanggal_mulai, peminjaman.peminjaman_tanggal_sampai, peminjaman.tanggal_kembali, peminjaman.peminjaman_status 
+					peminjaman.peminjaman_tanggal_mulai, peminjaman.peminjaman_tanggal_sampai, peminjaman.tanggal_kembali, peminjaman.peminjaman_status,peminjaman.ket 
 					FROM peminjaman INNER JOIN detail_buku INNER JOIN buku INNER JOIN anggota 
 					WHERE detail_buku.Id_detail=peminjaman.peminjaman_buku 
 					AND buku.id_buku=detail_buku.id_buku 
@@ -671,14 +672,32 @@ class Petugas extends CI_Controller
 			$data = $this->m_data->edit_data($where, 'peminjaman')->row();
 
 			$buku = $data->peminjaman_buku;
-			$tanggal_kembali = date("Y-m-d");
 
-			$dt = array(
-				'peminjaman_status' => 1,
-				'tanggal_kembali' => $tanggal_kembali
-			);
-			// mengubah status peminjaman menjadi selesai (1)
-			$this->m_data->update_data($where, $dt, 'peminjaman');
+			$tanggal_kembali = date("Y-m-d");
+			$_tgl = $this->db->query("SELECT peminjaman_tanggal_sampai FROM peminjaman WHERE peminjaman_id =\"$id\"")->row_array();
+			$tgl = $_tgl['peminjaman_tanggal_sampai'];
+			$start_date = new DateTime($tgl);
+			$end_date = new DateTime($tanggal_kembali);
+			$interval = $start_date->diff($end_date);
+			$terlambat = $interval->days;
+
+			if ($start_date > $end_date) {
+				$dt = array(
+					'peminjaman_status' => 1,
+					'tanggal_kembali' => $tanggal_kembali,
+					'ket' => 'dikembalikan tepat waktu'
+				);
+
+				$this->m_data->update_data($where, $dt, 'peminjaman');
+			} else {
+				$dt = array(
+					'peminjaman_status' => 1,
+					'tanggal_kembali' => $tanggal_kembali,
+					'ket' => 'terlambat ' . $terlambat . ' hari'
+				);
+
+				$this->m_data->update_data($where, $dt, 'peminjaman');
+			}
 
 			// mengembalikan status buku kembali ke tersedia (1)
 			$w = array(
@@ -702,15 +721,33 @@ class Petugas extends CI_Controller
 			// mengambil data buku pada peminjaman ber id tersebut
 			$data = $this->m_data->edit_data($where, 'peminjaman')->row();
 			$buku = $data->peminjaman_buku;
+
 			$tanggal_kembali = date("Y-m-d");
+			$_tgl = $this->db->query("SELECT peminjaman_tanggal_sampai FROM peminjaman WHERE peminjaman_id =\"$id\"")->row_array();
+			$tgl = $_tgl['peminjaman_tanggal_sampai'];
+			$start_date = new DateTime($tgl);
+			$end_date = new DateTime($tanggal_kembali);
+			$interval = $end_date->diff($start_date);
+			$terlambat = $interval->days;
 
+			if ($start_date > $end_date) {
+				$dt = array(
+					'peminjaman_status' => 1,
+					'tanggal_kembali' => $tanggal_kembali,
+					'ket' => 'dikembalikan tepat waktu'
+				);
 
-			$dt = array(
-				'peminjaman_status' => 1,
-				'tanggal_kembali' => $tanggal_kembali
-			);
-			// mengubah status peminjaman menjadi selesai (1)
-			$this->m_data->update_data($where, $dt, 'peminjaman');
+				$this->m_data->update_data($where, $dt, 'peminjaman');
+			} else {
+				$dt = array(
+					'peminjaman_status' => 1,
+					'tanggal_kembali' => $tanggal_kembali,
+					'ket' => 'terlambat ' . $terlambat . ' hari'
+				);
+
+				$this->m_data->update_data($where, $dt, 'peminjaman');
+			}
+
 
 			// mengembalikan status buku kembali ke tersedia (1)
 			$w = array(
@@ -817,6 +854,13 @@ class Petugas extends CI_Controller
 				WHERE pemesanan.nama_pemesan=anggota.nis
 				AND pemesanan.buku=buku.id_buku
 				AND buku.id_buku=detail_buku.id_buku
+				GROUP BY id_pesan DESC")->result();
+
+		$data['pemesanan2'] = $this->db->query("SELECT pemesanan.id_pesan,pemesanan.buku, pemesanan.nama_pemesan, waktu_pesan, pemesanan.status, anggota.nama, anggota.nis,anggota.kelas,buku.judul,buku.penulis, COUNT(IF(detail_buku.status!=2,1,null))AS stok FROM pemesanan,anggota,buku,detail_buku
+				WHERE pemesanan.nama_pemesan=anggota.nis
+				AND pemesanan.buku=buku.id_buku
+				AND buku.id_buku=detail_buku.id_buku
+                AND pemesanan.status<=3
 				GROUP BY id_pesan DESC")->result();
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 		$data['sesi'] = $this->db->get_where('petugas', ['id_login' => $this->session->userdata('id_login')])->row_array();
