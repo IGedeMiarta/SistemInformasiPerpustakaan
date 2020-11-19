@@ -42,6 +42,9 @@ class Auth extends CI_Controller
 			//user aktif
 			if ($user['is_active'] == 'Y') {
 				//cek password
+				$data1 = password_verify($password, $user['password']);
+				var_dump($data1);
+				die;
 				if (password_verify($password, $user['password'])) {
 
 					if ($user['role'] == 1) {

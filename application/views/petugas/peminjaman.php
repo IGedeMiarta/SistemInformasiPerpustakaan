@@ -22,10 +22,12 @@
     <div class="content">
         <div class="container-fluid">
             <!-- start -->
+            <?php echo $this->session->flashdata('messege'); ?>
             <div class="card">
                 <div class="card-header">
                     <a href="<?php echo base_url() . 'petugas/peminjaman_tambah' ?>" class='btn btn-sm btn-success pull-right'><i class="fa fa-plus"></i> Peminjaman Baru</a>
                 </div>
+
                 <div class="card-body">
 
                     <div class="table-responsive">

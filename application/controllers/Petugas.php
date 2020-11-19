@@ -680,6 +680,8 @@ class Petugas extends CI_Controller
 			$end_date = new DateTime($tanggal_kembali);
 			$interval = $start_date->diff($end_date);
 			$terlambat = $interval->days;
+			$bayar = 1000 * $terlambat;
+
 
 			if ($start_date > $end_date) {
 				$dt = array(
@@ -689,15 +691,27 @@ class Petugas extends CI_Controller
 				);
 
 				$this->m_data->update_data($where, $dt, 'peminjaman');
+				$this->session->set_flashdata('messege', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Dikembalikan Tepat Waktu
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>');
 			} else {
 				$dt = array(
 					'peminjaman_status' => 1,
 					'tanggal_kembali' => $tanggal_kembali,
-					'ket' => 'terlambat ' . $terlambat . ' hari'
+					'ket' => 'terlambat ' . $terlambat . ' hari,' . ' membayar dana keterlambatan Rp. ' . $bayar . ',00'
 				);
-
 				$this->m_data->update_data($where, $dt, 'peminjaman');
+				$this->session->set_flashdata('messege', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  terlambat ' . $terlambat . ' hari,' . ' Wajib membayar dana keterlambatan Rp. ' . $bayar . ',00
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>');
 			}
+
 
 			// mengembalikan status buku kembali ke tersedia (1)
 			$w = array(
@@ -708,7 +722,6 @@ class Petugas extends CI_Controller
 			);
 
 			$this->m_data->update_data($w, $d, 'detail_buku');
-
 
 
 			redirect(base_url() . 'petugas/peminjaman');
@@ -729,7 +742,7 @@ class Petugas extends CI_Controller
 			$end_date = new DateTime($tanggal_kembali);
 			$interval = $end_date->diff($start_date);
 			$terlambat = $interval->days;
-
+			$bayar = 1000 * $terlambat;
 			if ($start_date > $end_date) {
 				$dt = array(
 					'peminjaman_status' => 1,
@@ -738,14 +751,26 @@ class Petugas extends CI_Controller
 				);
 
 				$this->m_data->update_data($where, $dt, 'peminjaman');
+				$this->session->set_flashdata('messege', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Dikembalikan Tepat Waktu
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>');
 			} else {
 				$dt = array(
 					'peminjaman_status' => 1,
 					'tanggal_kembali' => $tanggal_kembali,
-					'ket' => 'terlambat ' . $terlambat . ' hari'
+					'ket' => 'terlambat ' . $terlambat . ' hari,' . ' membayar dana keterlambatan Rp. ' . $bayar . ',00'
 				);
 
 				$this->m_data->update_data($where, $dt, 'peminjaman');
+				$this->session->set_flashdata('messege', '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  terlambat ' . $terlambat . ' hari,' . ' Wajib membayar dana keterlambatan Rp. ' . $bayar . ',00
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>');
 			}
 
 

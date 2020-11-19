@@ -15,7 +15,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Login Pages</h1>
                                 </div>
-                                <?php echo $this->session->flashdata('messege'); ?>
+                                <!-- <?php echo $this->session->flashdata('messege'); ?> -->
 
                                 <form class="user" method="post" action="<?= base_url('auth'); ?>">
                                     <div class="form-group">
